@@ -38,9 +38,9 @@ class HuffmanReader:
         self.buffer = []
         self.is_last_byte = False
 
-        # Check if the file exists and is writable
-        if not os.path.isfile(file) or not os.access(file, os.W_OK):
-            raise PermissionError(f"The file {file} does not exist or is not writable.")
+        # Check if the file exists, is readable, and is writable
+        if not os.path.isfile(file) or not os.access(file, os.R_OK) or not os.access(file, os.W_OK):
+            raise PermissionError(f"The file {file} does not exist, is not readable, or is not writable.")
 
         self.open_file()
 
