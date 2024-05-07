@@ -4,7 +4,7 @@ This algorithm analyzes the symbols that appear in a message.
 Symbols that appear more often will be encoded as a shorter-bit string
 while symbols that aren't used as much will be encoded as longer strings.
 """
-
+import os
 from collections import defaultdict, deque
 import heapq
 
@@ -37,6 +37,18 @@ class HuffmanReader:
         self.file = file
         self.buffer = []
         self.is_last_byte = False
+
+        # Check if the file exists and is writable
+        if not os.path.isfile(file) or not os.access(file, os.W_OK):
+            raise PermissionError(f"The file {file} does not exist or is not writable.")
+
+        self.open_file()
+
+    def open_file(self):
+        try:
+            self.file = open(self.file, 'wb')
+        except IOError as e:
+            raise IOError(f"Failed to open file {self.file} for writing: {e}")
 
     def get_number_of_additional_bits_in_the_last_byte(self) -> int:
         bin_num = self.get_bit() + self.get_bit() + self.get_bit()
