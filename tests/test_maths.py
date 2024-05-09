@@ -120,7 +120,9 @@ class TestExtendedGcd(unittest.TestCase):
         self.assertEqual(extended_gcd(240, 46), (-9, 47 , 2))
         self.assertEqual(extended_gcd(119, 544), (-9, 2, 17))
 
-        self.assertEqual(extended_gcd(0, 9), (1, 0, 9))  # Handling zero
+        self.assertEqual(extended_gcd(0, 9), (0, 1, 9))  # Handling zero
+        self.assertEqual(extended_gcd(9, 0), (1, 0, 9)) 
+        self.assertEqual(extended_gcd(0, 0), (1, 0, 0)) 
 
         self.assertEqual(extended_gcd(-27, 18), (1, 2, 9))  # Handling negatives
 
