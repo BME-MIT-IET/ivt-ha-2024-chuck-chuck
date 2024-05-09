@@ -114,8 +114,17 @@ class TestExtendedGcd(unittest.TestCase):
     """
 
     def test_extended_gcd(self):
-        self.assertEqual((0, 1, 2), extended_gcd(8, 2))
-        self.assertEqual((0, 1, 17), extended_gcd(13, 17))
+        self.assertEqual(extended_gcd(8, 2), (0, 1, 2))
+        self.assertEqual(extended_gcd(13, 17), (4, -3, 1))
+        self.assertEqual(extended_gcd(18, 35), (2, -1, 1))
+        self.assertEqual(extended_gcd(240, 46), (-9, 47 , 2))
+        self.assertEqual(extended_gcd(119, 544), (-9, 2, 17))
+
+        self.assertEqual(extended_gcd(0, 9), (1, 0, 9))  # Handling zero
+
+        self.assertEqual(extended_gcd(-27, 18), (1, 2, 9))  # Handling negatives
+
+        self.assertEqual(extended_gcd(17, 31), (11, -6, 1))  # Prime number gcd
 
 
 class TestGcd(unittest.TestCase):
