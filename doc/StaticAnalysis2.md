@@ -27,7 +27,7 @@ Written and documented by Doskozhoeva Eliza
 
 ![](e3.png)
 
--It has same warning as the previous one.
+- It has same warning as the previous one.
 
 
 **Location:** ivt-ha-2024-chuck-chuck\algorithms\stack\remove_min.py
