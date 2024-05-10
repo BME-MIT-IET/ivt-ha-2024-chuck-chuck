@@ -3,7 +3,7 @@
 # Project Summary
 
 ### Overview
-Algorithms project is a inclusive collection of compact and nice example which implementing the data structures and algorithms in Python 3. It covered topics such as arrays, graphs, sorting algorithms, dynamic programming, mathematical operations, string manipulation, tree and graph traversal, etc.
+Algorithms project is a collection of reusable code which implementing the data structures and algorithms in Python3. It covered topics such as arrays, graphs, sorting algorithms, dynamic programming, mathematical operations, string manipulation, tree and graph traversal, etc.
 
 ### Structure
 The project contained in different folders based on the type of algorithms and data structures they implement and each folder contains multiple Python files, each focusing on a specific feature of the algorithm or data structure.
