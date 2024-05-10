@@ -11,10 +11,10 @@ def extended_gcd(num1, num2):
     """
     
     if num1 != 0 and num2 == 0:
-        return (1, 0, num2) 
+        return (1, 0, num1) 
     
     if num1 == 0:
-        return (0, 1, 0) 
+        return (0, 1, num2) 
     
     old_s, s = 1, 0
     old_t, t = 0, 1
