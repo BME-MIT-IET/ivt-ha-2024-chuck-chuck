@@ -159,14 +159,14 @@ class TestExtendedGcd(unittest.TestCase):
         self.assertEqual(extended_gcd(18, 35), (2, -1, 1))
         self.assertEqual(extended_gcd(240, 46), (-9, 47 , 2))
         self.assertEqual(extended_gcd(119, 544), (-9, 2, 17))
-
-        self.assertEqual(extended_gcd(0, 9), (0, 1, 9))  # Handling zero
+        # Handling zero
+        self.assertEqual(extended_gcd(0, 9), (0, 1, 9)) 
         self.assertEqual(extended_gcd(9, 0), (1, 0, 9)) 
         self.assertEqual(extended_gcd(0, 0), (0, 1, 0)) 
-
-        self.assertEqual(extended_gcd(-27, 18), (1, 2, 9))  # Handling negatives
-
-        self.assertEqual(extended_gcd(17, 31), (11, -6, 1))  # Prime number gcd
+        # Handling negatives
+        self.assertEqual(extended_gcd(-27, 18), (1, 2, 9))
+        # Prime number gcd
+        self.assertEqual(extended_gcd(17, 31), (11, -6, 1))
 
 
 class TestGcd(unittest.TestCase):
@@ -240,12 +240,12 @@ class TestGenerateStroboGrammatic(unittest.TestCase):
         self.assertEqual(4, strobogrammatic_in_range("10", "100"))
 
     def test_strobogrammatic_in_range_length_variation(self):
-        # Tests to cover line 49: Generate strobogrammatic numbers for varying lengths
+        # Line 49: Generate strobogrammatic numbers for varying lengths
         count = strobogrammatic_in_range("10", "100")
         self.assertEqual(count, 4)  # Expected strobogrammatic numbers are "11", "88", "69", "96"
 
     def test_strobogrammatic_count_valid(self):
-        # Tests to cover line 64: Count valid strobogrammatic numbers within the range
+        # Line 64: Count valid strobogrammatic numbers within the range
         count = strobogrammatic_in_range("1", "50")
         self.assertEqual(count, 3)  # "11", "8", "1"
 
@@ -470,7 +470,6 @@ class TestCosineSimilarity(unittest.TestCase):
         self.assertAlmostEqual(cosine_similarity(vec_a, vec_c), 0.4714045208)
         
     def test_vector_length_mismatch(self):
-        # Test that the function raises ValueError if input vectors have different lengths
         vec1 = [1, 2]
         vec2 = [1, 2, 3]
         with self.assertRaises(ValueError):
@@ -556,24 +555,21 @@ class TestDiffieHellmanKeyExchange(unittest.TestCase):
         self.assertTrue(diffie_hellman_key_exchange(11, 971))
     
     def test_prime_check(self):
-        self.assertFalse(prime_check(1))  # 1 is not prime
-        self.assertTrue(prime_check(2))   # 2 is prime, smallest prime number
-        self.assertTrue(prime_check(3))   # 3 is prime
-        self.assertFalse(prime_check(4))  # 4 is not prime
+        self.assertFalse(prime_check(1))
+        self.assertFalse(prime_check(4))
+        self.assertTrue(prime_check(2)) 
+        self.assertTrue(prime_check(3))
 
     def test_find_order_general(self):
-        # General test to ensure correct computation of order
-        self.assertEqual(find_order(2, 11), 10)  # 2 is a known primitive root of 11
-        self.assertEqual(find_order(6, 7), 2)    # 6^2 % 7 = 1
+        self.assertEqual(find_order(2, 11), 10)
+        self.assertEqual(find_order(6, 7), 2)   
 
     def test_diffie_hellman_key_exchange_valid(self):
-        # Line 152: Test key exchange with valid prime and primitive root
-        a, p = 2, 11  # Known prime and its primitive root
+        a, p = 2, 11 
         self.assertTrue(diffie_hellman_key_exchange(a, p))
 
     def test_diffie_hellman_key_exchange_invalid(self):
-        # Test key exchange with non-prime or wrong primitive root
-        a, p = 4, 8  # Non-prime and incorrect root
+        a, p = 4, 8 
         self.assertFalse(diffie_hellman_key_exchange(a, p))
 
     def test_diffie_hellman_print_option(self):
@@ -625,26 +621,18 @@ class TestNumberOfPerfectSquares(unittest.TestCase):
 
 class TestChineseRemainderSolver(unittest.TestCase):
     def test_k_three(self):
-        # Example which should give the answer 143
-        # which is the smallest possible x that
-        # solves the system of equations
         num = [3, 7, 10]
         rem = [2, 3, 3]
         self.assertEqual(chinese_remainder_theorem.
                          solve_chinese_remainder(num, rem), 143)
 
     def test_k_five(self):
-        # Example which should give the answer 3383
-        # which is the smallest possible x that
-        # solves the system of equations
         num = [3, 5, 7, 11, 26]
         rem = [2, 3, 2, 6, 3]
         self.assertEqual(chinese_remainder_theorem.
                          solve_chinese_remainder(num, rem), 3383)
 
     def test_exception_non_coprime(self):
-        # There should be an exception when all
-        # numbers in num are not pairwise coprime
         num = [3, 7, 10, 14]
         rem = [2, 3, 3, 1]
         with self.assertRaises(Exception):
@@ -667,7 +655,7 @@ class TestChineseRemainderSolver(unittest.TestCase):
 
     def test_valid_input(self):
         # Correct operation test
-        self.assertEqual(chinese_remainder_theorem .solve_chinese_remainder([3, 5, 7], [2, 3, 2]), 23)  # Example result
+        self.assertEqual(chinese_remainder_theorem .solve_chinese_remainder([3, 5, 7], [2, 3, 2]), 23) 
 
 
 class TestFFT(unittest.TestCase):
