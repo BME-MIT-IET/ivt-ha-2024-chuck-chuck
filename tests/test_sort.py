@@ -18,7 +18,8 @@ from algorithms.sort import (
     gnome_sort,
     cocktail_shaker_sort,
     top_sort, top_sort_recursive,
-    insertion_sort
+    insertion_sort,
+    stoogesort
 )
 
 import unittest
@@ -95,6 +96,28 @@ class TestSuite(unittest.TestCase):
     def test_selection_sort(self):
         self.assertTrue(is_sorted(selection_sort([1, 3, 2, 5, 65,
                                                   23, 57, 1232])))
+        
+    def test_stooge_sort(self):
+        # Empty
+        arr = []
+        stoogesort(arr, 0, len(arr) - 1)
+        self.assertEqual(arr, [])
+        
+        arr = [1]
+        stoogesort(arr, 0, len(arr) - 1)
+        self.assertEqual(arr, [1])
+        
+        arr = [1, 2, 3, 4, 5]
+        stoogesort(arr, 0, len(arr) - 1)
+        self.assertEqual(arr, [1, 2, 3, 4, 5])
+        # Reverse sorted
+        arr = [5, 4, 3, 2, 1]
+        stoogesort(arr, 0, len(arr) - 1)
+        self.assertEqual(arr, [1, 2, 3, 4, 5])
+        # With duplicates
+        arr = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5]
+        stoogesort(arr, 0, len(arr) - 1)
+        self.assertEqual(arr, [1, 1, 2, 3, 3, 4, 5, 5, 5, 6, 9])
 
     def test_bucket_sort(self):
         self.assertTrue(is_sorted(bucket_sort([1, 3, 2, 5, 65, 23, 57, 1232])))
