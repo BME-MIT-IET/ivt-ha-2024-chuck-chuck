@@ -57,7 +57,6 @@ class TestSuite(unittest.TestCase):
                          second_switch_pairs([3, 8, 17, 9, 1]))
 
     def test_is_valid_parenthesis(self):
-
         self.assertTrue(is_valid("[]"))
         self.assertTrue(is_valid("[]()[]"))
         self.assertFalse(is_valid("[[[]]"))
@@ -137,17 +136,48 @@ class TestStack(unittest.TestCase):
 
 
 class TestOrderedStack(unittest.TestCase):
-    def test_OrderedStack(self):
-        stack = OrderedStack()
-        self.assertTrue(stack.is_empty())
-        stack.push(1)
-        stack.push(4)
-        stack.push(3)
-        stack.push(6)
-        "bottom - > 1 3 4 6 "
-        self.assertEqual(6, stack.pop())
-        self.assertEqual(4, stack.peek())
-        self.assertEqual(3, stack.size())
+    def setUp(self):
+        self.stack = OrderedStack()
+
+    def test_init(self):
+        self.assertEqual(self.stack.size(), 0)
+        self.assertTrue(self.stack.is_empty())
+
+    def test_push(self):
+        self.stack.push(5)
+        self.stack.push(3)
+        self.stack.push(1)
+        self.assertEqual(self.stack.items, [1, 3, 5])
+
+    def test_pop(self):
+        self.stack.push(2)
+        self.stack.push(1)
+        self.assertEqual(self.stack.pop(), 2)
+        self.assertEqual(self.stack.pop(), 1)
+        with self.assertRaises(IndexError):
+            self.stack.pop()
+
+    def test_peek(self):
+        self.stack.push(4)
+        self.stack.push(7)
+        self.assertEqual(self.stack.peek(), 7)
+        self.stack.pop()
+        self.assertEqual(self.stack.peek(), 4)
+
+    def test_peek_error(self):
+        self.stack.push(4)
+        self.stack.pop()
+        with self.assertRaises(IndexError):
+            self.stack.peek()
+
+    def test_size(self):
+        self.assertEqual(self.stack.size(), 0)
+        self.stack.push(10)
+        self.assertEqual(self.stack.size(), 1)
+        self.stack.push(20)
+        self.assertEqual(self.stack.size(), 2)
+        self.stack.pop()
+        self.assertEqual(self.stack.size(), 1)
 
 
 if __name__ == "__main__":
