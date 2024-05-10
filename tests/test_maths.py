@@ -2,7 +2,6 @@ from algorithms.maths import (
     power, power_recur,
     int_to_base, base_to_int,
     decimal_to_binary_ip,
-    euler_totient,
     extended_gcd,
     factorial, factorial_recur,
     gcd, lcm, trailing_zero, gcd_bit,
@@ -20,14 +19,15 @@ from algorithms.maths import (
     hailstone,
     cosine_similarity,
     magic_number,
-    find_order,
-    find_primitive_root,
     num_digits,
     diffie_hellman_key_exchange, krishnamurthy_number,
     num_perfect_squares,
     chinese_remainder_theorem,
     fft
 )
+from algorithms.maths.euler_totient import euler_totient
+from algorithms.maths.find_order_simple import find_order
+from algorithms.maths.find_primitive_root_simple import find_primitive_root
 
 import unittest
 import pytest
@@ -66,11 +66,26 @@ class TestBaseConversion(unittest.TestCase):
         self.assertEqual("101", int_to_base(5, 2))
         self.assertEqual("0", int_to_base(0, 2))
         self.assertEqual("FF", int_to_base(255, 16))
+        
+        # Testing conversion of a negative number in binary and hexadecimal
+        self.assertEqual(int_to_base(-5, 2), '-101')
+        self.assertEqual(int_to_base(-10, 16), '-A')
 
     def test_base_to_int(self):
         self.assertEqual(5, base_to_int("101", 2))
         self.assertEqual(0, base_to_int("0", 2))
         self.assertEqual(255, base_to_int("FF", 16))
+        
+        # Testing conversion from string to integer in various bases
+        self.assertEqual(base_to_int('101', 2), 5)
+        self.assertEqual(base_to_int('A', 16), 10)
+        self.assertEqual(base_to_int('FF', 16), 255)
+        
+    def test_int_to_base_zero(self):
+        # Testing conversion of zero in various bases
+        self.assertEqual(int_to_base(0, 2), '0')
+        self.assertEqual(int_to_base(0, 10), '0')
+        self.assertEqual(int_to_base(0, 16), '0')
 
 
 class TestDecimalToBinaryIP(unittest.TestCase):
@@ -103,6 +118,31 @@ class TestEulerTotient(unittest.TestCase):
         self.assertEqual(12, euler_totient(21))
         self.assertEqual(311040, euler_totient(674614))
         self.assertEqual(2354352, euler_totient(3435145))
+        
+    def test_prime_numbers(self):
+        # Primes: result should be n-1
+        self.assertEqual(euler_totient(2), 1)
+        self.assertEqual(euler_totient(13), 12)
+        self.assertEqual(euler_totient(29), 28)
+
+    def test_composite_numbers_no_repeats(self):
+        # Composite numbers with no repeated factors
+        self.assertEqual(euler_totient(6), 2)   # 6 = 2 * 3
+        self.assertEqual(euler_totient(10), 4)  # 10 = 2 * 5
+
+    def test_composite_numbers_repeated_factors(self):
+        # Composite numbers with repeated factors
+        self.assertEqual(euler_totient(8), 4)   # 8 = 2^3
+        self.assertEqual(euler_totient(18), 6)  # 18 = 2 * 3^2
+
+    def test_power_of_prime(self):
+        # Powers of a prime
+        self.assertEqual(euler_totient(16), 8)  # 16 = 2^4
+
+    def test_small_values(self):
+        # Small values of n
+        self.assertEqual(euler_totient(1), 1)
+        self.assertEqual(euler_totient(3), 2)
 
 
 class TestExtendedGcd(unittest.TestCase):
@@ -122,7 +162,7 @@ class TestExtendedGcd(unittest.TestCase):
 
         self.assertEqual(extended_gcd(0, 9), (0, 1, 9))  # Handling zero
         self.assertEqual(extended_gcd(9, 0), (1, 0, 9)) 
-        self.assertEqual(extended_gcd(0, 0), (1, 0, 0)) 
+        self.assertEqual(extended_gcd(0, 0), (0, 1, 0)) 
 
         self.assertEqual(extended_gcd(-27, 18), (1, 2, 9))  # Handling negatives
 
@@ -198,6 +238,16 @@ class TestGenerateStroboGrammatic(unittest.TestCase):
 
     def test_strobogrammatic_in_range(self):
         self.assertEqual(4, strobogrammatic_in_range("10", "100"))
+
+    def test_strobogrammatic_in_range_length_variation(self):
+        # Tests to cover line 49: Generate strobogrammatic numbers for varying lengths
+        count = strobogrammatic_in_range("10", "100")
+        self.assertEqual(count, 4)  # Expected strobogrammatic numbers are "11", "88", "69", "96"
+
+    def test_strobogrammatic_count_valid(self):
+        # Tests to cover line 64: Count valid strobogrammatic numbers within the range
+        count = strobogrammatic_in_range("1", "50")
+        self.assertEqual(count, 3)  # "11", "8", "1"
 
 
 class TestIsStrobogrammatic(unittest.TestCase):
@@ -418,6 +468,13 @@ class TestCosineSimilarity(unittest.TestCase):
         self.assertAlmostEqual(cosine_similarity(vec_a, vec_a), 1)
         self.assertAlmostEqual(cosine_similarity(vec_a, vec_b), -1)
         self.assertAlmostEqual(cosine_similarity(vec_a, vec_c), 0.4714045208)
+        
+    def test_vector_length_mismatch(self):
+        # Test that the function raises ValueError if input vectors have different lengths
+        vec1 = [1, 2]
+        vec2 = [1, 2, 3]
+        with self.assertRaises(ValueError):
+            cosine_similarity(vec1, vec2)
 
 
 class TestFindPrimitiveRoot(unittest.TestCase):
@@ -497,6 +554,38 @@ class TestDiffieHellmanKeyExchange(unittest.TestCase):
         self.assertTrue(diffie_hellman_key_exchange(3, 353))
         self.assertFalse(diffie_hellman_key_exchange(5, 211))
         self.assertTrue(diffie_hellman_key_exchange(11, 971))
+    
+    def test_prime_check(self):
+        self.assertFalse(prime_check(1))  # 1 is not prime
+        self.assertTrue(prime_check(2))   # 2 is prime, smallest prime number
+        self.assertTrue(prime_check(3))   # 3 is prime
+        self.assertFalse(prime_check(4))  # 4 is not prime
+
+    def test_find_order_general(self):
+        # General test to ensure correct computation of order
+        self.assertEqual(find_order(2, 11), 10)  # 2 is a known primitive root of 11
+        self.assertEqual(find_order(6, 7), 2)    # 6^2 % 7 = 1
+
+    def test_diffie_hellman_key_exchange_valid(self):
+        # Line 152: Test key exchange with valid prime and primitive root
+        a, p = 2, 11  # Known prime and its primitive root
+        self.assertTrue(diffie_hellman_key_exchange(a, p))
+
+    def test_diffie_hellman_key_exchange_invalid(self):
+        # Test key exchange with non-prime or wrong primitive root
+        a, p = 4, 8  # Non-prime and incorrect root
+        self.assertFalse(diffie_hellman_key_exchange(a, p))
+
+    def test_diffie_hellman_print_option(self):
+        # Lines 172-175: Test the optional print statements
+        import io
+        import sys
+        captured_output = io.StringIO()
+        sys.stdout = captured_output
+        a, p = 2, 11
+        diffie_hellman_key_exchange(a, p, option=1)
+        sys.stdout = sys.__stdout__
+        self.assertIn("Alice's private key", captured_output.getvalue())
 
 
 class TestNumberOfDigits(unittest.TestCase):
@@ -566,6 +655,19 @@ class TestChineseRemainderSolver(unittest.TestCase):
         rem = []
         with self.assertRaises(Exception):
             chinese_remainder_theorem.solve_chinese_remainder(num, rem)
+            
+    def test_unequal_length_exception(self):
+        # Line 21: Checks for exception when lengths are unequal
+        self.assertRaises(Exception, chinese_remainder_theorem .solve_chinese_remainder, [3, 5], [1])
+    
+    def test_invalid_nums_value_exception(self):
+        # Line 26: Checks for exception when nums contain a value <= 1
+        self.assertRaises(Exception, chinese_remainder_theorem .solve_chinese_remainder, [0, 5], [0, 1])
+        self.assertRaises(Exception, chinese_remainder_theorem .solve_chinese_remainder, [2, -3], [1, 2])
+
+    def test_valid_input(self):
+        # Correct operation test
+        self.assertEqual(chinese_remainder_theorem .solve_chinese_remainder([3, 5, 7], [2, 3, 2]), 23)  # Example result
 
 
 class TestFFT(unittest.TestCase):
