@@ -44,6 +44,10 @@ class TestSuite(unittest.TestCase):
         self.assertTrue(is_sorted(bitonic_sort([1, 3, 2, 5, 65,
                                                 23, 57, 1232])))
 
+    def test_bitonic_sort_error(self):
+        with self.assertRaises(ValueError):
+            bitonic_sort([1, 2, 3])
+
     def test_bubble_sort(self):
         self.assertTrue(is_sorted(bubble_sort([1, 3, 2, 5, 65, 23, 57, 1232])))
 

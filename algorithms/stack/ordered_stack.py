@@ -18,7 +18,7 @@ class OrderedStack:
         if self.is_empty() or item > self.peek():
             self.push_t(item)
         else:
-            while item < self.peek() and not self.is_empty():
+            while not self.is_empty() and item < self.peek():
                 temp_stack.push_t(self.pop())
             self.push_t(item)
             while not temp_stack.is_empty():
@@ -30,7 +30,9 @@ class OrderedStack:
         return self.items.pop()
 
     def peek(self):
-        return self.items[len(self.items) - 1]
+        if self.is_empty():
+            raise IndexError("Stack is empty")
+        return self.items[-1]
 
     def size(self):
         return len(self.items)
