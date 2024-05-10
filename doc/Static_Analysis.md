@@ -1,5 +1,7 @@
 # Static Analysis Report
 
+Written and documented by Mean Diamand
+
 ## Objective
 
 - The goal of this document is to provide the overview of some implementations of the project by using the static analysis tool to automatically reviewing the code of the project which can result in clean code.
