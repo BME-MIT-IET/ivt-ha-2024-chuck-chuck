@@ -21,6 +21,11 @@ This document summarizes the results of improving and extending unit testing wit
 - finder_order_simple.py
 - find_primitive_root_simple.py
 - generate_strobogrammtic.py
+- stooge.sort.py 
+- insrtion_sort.py
+- num_decodings.py
+- max_product_subarray
+
 
 ## Coverage after our work
 
