@@ -114,7 +114,6 @@ Since the project that we using is quite large, so we decide to document the sta
 
 - This issue indicates the wrong usage of the operator. In the code, using a combination between 'not' keyword with the '==' operator is not preferrable and may lead to confusion. It is better to use '!=' operator instead which is more straightforward and easy to understand.
 
-<<<<<<< HEAD
 ## stack
 
 **Location:** ivt-ha-2024-chuck-chuck\algorithms\stack\is_consecutive.py
