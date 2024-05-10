@@ -1,0 +1,6 @@
+projectKey=IVT-HW-Project
+serverUrl=http://localhost:9000
+serverVersion=10.5.1.90531
+dashboardUrl=http://localhost:9000/dashboard?id=IVT-HW-Project
+ceTaskId=685ccf54-f6d4-4ca6-8109-a3c272f594e5
+ceTaskUrl=http://localhost:9000/api/ce/task?id=685ccf54-f6d4-4ca6-8109-a3c272f594e5
