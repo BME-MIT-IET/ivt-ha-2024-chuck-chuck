@@ -23,7 +23,7 @@ def fft(x):
     even = fft(x[0::2])
     odd = fft(x[1::2])
 
-    y = [0 for i in range(N)]
+    y = [0 for _ in range(N)]
     for k in range(N//2):
         q = exp(-2j*pi*k/N)*odd[k]
         y[k] = even[k] + q
