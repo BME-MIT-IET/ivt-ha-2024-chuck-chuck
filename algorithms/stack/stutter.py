@@ -16,9 +16,9 @@ import collections
 
 def first_stutter(stack):
     storage_stack = []
-    for i in range(len(stack)):
+    for _ in range(len(stack)):
         storage_stack.append(stack.pop())
-    for i in range(len(storage_stack)):
+    for _ in range(len(storage_stack)):
         val = storage_stack.pop()
         stack.append(val)
         stack.append(val)
@@ -29,16 +29,16 @@ def first_stutter(stack):
 def second_stutter(stack):
     q = collections.deque()
     # Put all values into queue from stack
-    for i in range(len(stack)):
+    for _ in range(len(stack)):
         q.append(stack.pop())
     # Put values back into stack from queue
-    for i in range(len(q)):
+    for _ in range(len(q)):
         stack.append(q.pop())
     # Now, stack is reverse, put all values into queue from stack
-    for i in range(len(stack)):
+    for _ in range(len(stack)):
         q.append(stack.pop())
     # Put 2 times value into stack from queue
-    for i in range(len(q)):
+    for _ in range(len(q)):
         val = q.pop()
         stack.append(val)
         stack.append(val)
