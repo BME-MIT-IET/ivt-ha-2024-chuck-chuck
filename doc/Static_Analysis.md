@@ -1,6 +1,6 @@
 # Static Analysis Report
 
-Written and Documented by Mean Diamand and Doskozhoeva Eliza
+Written and documented by Mean Diamand
 
 ## Objective
 
@@ -114,6 +114,7 @@ Since the project that we using is quite large, so we decide to document the sta
 
 - This issue indicates the wrong usage of the operator. In the code, using a combination between 'not' keyword with the '==' operator is not preferrable and may lead to confusion. It is better to use '!=' operator instead which is more straightforward and easy to understand.
 
+<<<<<<< HEAD
 ## stack
 
 **Location:** ivt-ha-2024-chuck-chuck\algorithms\stack\is_consecutive.py
@@ -140,3 +141,29 @@ Since the project that we using is quite large, so we decide to document the sta
 
 -It has same warning such that we can substitute unnecessary variable since it is not used inside the loop.
 
+=======
+## arrays
+
+**Location:** ivt-ha-2024-chuck-chuck\algorithms\arrays/longest_non_repeat.py
+
+![](f23.png)
+
+![](f24.png)
+
+- This issue indicates the usage of variable name matches the name of the builtin in Python which make the builtin to be no longer accessible through its original name since this local variable has replaced it. This might cause bugs as you might reference the builtin by mistake. It is better to rename it to something else which helps improving the readability and easy to understand
+
+**Location:** ivt-ha-2024-chuck-chuck\algorithms\arrays/move_zeros.py
+
+![](f25.png)
+
+- This issue indicates that this is a wrong way to do direct type comparsion is not preferrable to use the '!=' operator which is actually used for checking the value that is not equal. To perform the type comparison in Python, it is recommended to use the combination of 'not' keyword with the isinstance() builtin function which can check whether the object belongs to the a subclass of the specified class providing maintainability and extensible.
+
+![](f26.png)
+![](f27.png)
+
+- This issue indicates the complexity of the 'n_sum' function is too complex and require some refactoring since this function contained so many duplicated conditional statement branch that can be form into one statement branch and the function can be separate into smaller and simple functions which provide readability, easy to maintain, and easy to understand.
+
+![](f28.png)
+
+- This issue indicates that the commented-out code distracts the focus from the actual executed code. It creates a noise that increases maintenance code. And because it is never executed, it quickly becomes out of date and invalid.
+>>>>>>> 17bc5aa7c1eae4ec41b6acd89e9dceb601990474
