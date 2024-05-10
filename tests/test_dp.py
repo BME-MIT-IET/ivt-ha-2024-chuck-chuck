@@ -14,7 +14,8 @@ from algorithms.dp import (
     longest_increasing_subsequence_optimized,
     longest_increasing_subsequence_optimized2,
     int_divide,find_k_factor,
-    planting_trees, regex_matching
+    planting_trees, regex_matching,
+    max_product
 )
 
 
@@ -258,6 +259,12 @@ class TestRegexMatching(unittest.TestCase):
         p = "ab*"
         self.assertTrue(regex_matching.is_match(s, p))
 
-
+class TestMaxProductSubarray(unittest.TestCase):
+    def test_max_product(self):
+        self.assertEqual(max_product([2, 3, -2, 4]), 6)
+        self.assertEqual(max_product([-2, 0, -1]), 0)
+        self.assertEqual(max_product([-2, -3, 0, 4]), 6)
+        self.assertEqual(max_product([-2, -3, -4]), 12)    
+        
 if __name__ == '__main__':
     unittest.main()
