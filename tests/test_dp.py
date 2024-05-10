@@ -14,7 +14,9 @@ from algorithms.dp import (
     longest_increasing_subsequence_optimized,
     longest_increasing_subsequence_optimized2,
     int_divide,find_k_factor,
-    planting_trees, regex_matching
+    planting_trees, regex_matching,
+    max_product,
+    num_decodings, num_decodings2
 )
 
 
@@ -258,6 +260,26 @@ class TestRegexMatching(unittest.TestCase):
         p = "ab*"
         self.assertTrue(regex_matching.is_match(s, p))
 
+class TestMaxProductSubarray(unittest.TestCase):
+    def test_max_product(self):
+        self.assertEqual(max_product([2, 3, -2, 4]), 6)
+        self.assertEqual(max_product([-2, 0, -1]), 0)
+        self.assertEqual(max_product([-2, -3, 0, 4]), 6)
+        self.assertEqual(max_product([-2, -3, -4]), 12)    
 
+class TestNumDecodings(unittest.TestCase):
+    def test_num_decodings(self):
+        self.assertEqual(num_decodings("12"), 2)
+        self.assertEqual(num_decodings("226"), 3)
+        self.assertEqual(num_decodings("06"), 0)
+
+    def test_num_decodings2(self):
+        self.assertEqual(num_decodings2("10"), 1)
+        self.assertEqual(num_decodings2("30"), 0)
+        self.assertEqual(num_decodings2("12"), 2)
+        self.assertEqual(num_decodings2("27"), 1)
+        self.assertEqual(num_decodings2("226"), 3)
+        self.assertEqual(num_decodings2("06"), 0)
+        
 if __name__ == '__main__':
     unittest.main()
