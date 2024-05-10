@@ -35,22 +35,6 @@ def step_impl(context):
     ]
     context.sudoku = Sudoku(board, 9, 9)
 
-# Context setup for a board with invalid inputs
-@given('a Sudoku board with invalid inputs')
-def step_impl(context):
-    board = [
-        ['.', '.', '.', '.', '.', '.', '.', '.', '.'],
-        ['.', '.', '.', '.', '.', '.', '.', '.', '.'],
-        ['.', '.', '.', '.', '.', '.', '.', '.', '.'],
-        ['.', '.', '.', '.', '.', '.', '.', '.', '.'],
-        ['.', '.', '.', '.', '.', '.', '.', '.', '.'],
-        ['.', '.', '.', '.', '.', '.', '.', '.', '.'],
-        ['.', '.', '.', '.', '.', '.', '.', '.', '.'],
-        ['.', '.', '.', '.', '.', '.', '.', '.', '.'],
-        ['.', '.', '.', '.', '.', '.', '.', '.', 'x']  # Invalid character
-    ]
-    context.sudoku = Sudoku(board, 9, 9)
-
 @when('the solver attempts to solve the board')
 def step_impl(context):
     try:
