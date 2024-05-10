@@ -13,6 +13,8 @@ is_empty() tests to see whether the stack is empty.
 """
 from abc import ABCMeta, abstractmethod
 
+# Constant for the error message
+STACK_EMPTY_ERROR = "Stack is empty"
 
 class AbstractStack(metaclass=ABCMeta):
     """Abstract Class for Stacks."""
@@ -72,7 +74,7 @@ class ArrayStack(AbstractStack):
 
     def pop(self):
         if self.is_empty():
-            raise IndexError("Stack is empty")
+            raise IndexError(STACK_EMPTY_ERROR)
         value = self._array[self._top]
         self._top -= 1
         return value
@@ -80,7 +82,7 @@ class ArrayStack(AbstractStack):
     def peek(self):
         """returns the current top element of the stack."""
         if self.is_empty():
-            raise IndexError("Stack is empty")
+            raise IndexError(STACK_EMPTY_ERROR)
         return self._array[self._top]
 
     def _expand(self):
@@ -120,7 +122,7 @@ class LinkedListStack(AbstractStack):
 
     def pop(self):
         if self.is_empty():
-            raise IndexError("Stack is empty")
+            raise IndexError(STACK_EMPTY_ERROR)
         value = self.head.value
         self.head = self.head.next
         self._top -= 1
@@ -128,5 +130,5 @@ class LinkedListStack(AbstractStack):
 
     def peek(self):
         if self.is_empty():
-            raise IndexError("Stack is empty")
+            raise IndexError(STACK_EMPTY_ERROR)
         return self.head.value

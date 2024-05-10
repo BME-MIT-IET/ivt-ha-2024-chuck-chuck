@@ -25,9 +25,9 @@ import collections
 
 def first_switch_pairs(stack):
     storage_stack = []
-    for i in range(len(stack)):
+    for _ in range(len(stack)):
         storage_stack.append(stack.pop())
-    for i in range(len(storage_stack)):
+    for _ in range(len(storage_stack)):
         if len(storage_stack) == 0:
             break
         first = storage_stack.pop()
@@ -43,16 +43,16 @@ def first_switch_pairs(stack):
 def second_switch_pairs(stack):
     q = collections.deque()
     # Put all values into queue from stack
-    for i in range(len(stack)):
+    for _ in range(len(stack)):
         q.append(stack.pop())
     # Put values back into stack from queue
-    for i in range(len(q)):
+    for _ in range(len(q)):
         stack.append(q.pop())
     # Now, stack is reverse, put all values into queue from stack
-    for i in range(len(stack)):
+    for _ in range(len(stack)):
         q.append(stack.pop())
     # Swap pairs by appending the 2nd value before appending 1st value
-    for i in range(len(q)):
+    for _ in range(len(q)):
         if len(q) == 0:
             break
         first = q.pop()

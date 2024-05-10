@@ -114,34 +114,6 @@ Since the project that we using is quite large, so we decide to document the sta
 
 - This issue indicates the wrong usage of the operator. In the code, using a combination between 'not' keyword with the '==' operator is not preferrable and may lead to confusion. It is better to use '!=' operator instead which is more straightforward and easy to understand.
 
-<<<<<<< HEAD
-## stack
-
-**Location:** ivt-ha-2024-chuck-chuck\algorithms\stack\is_consecutive.py
-
-![](e1.png)
-![](e2.png)
-
-- The SonarLint warning (python:S1481) suggests replacing the unused loop index "i" with "_" to indicate that it's intentionally unused. And unused local variable because the "i" not used inside the loop.
-
-**Location:** ivt-ha-2024-chuck-chuck\algorithms\stack\is_sorted.py
-
-![](e3.png)
-
--It has same warning as the previous one.
-
-
-**Location:** ivt-ha-2024-chuck-chuck\algorithms\stack\remove_min.py
-
-![](e4.png)
-
-- Now it suggests renaming the variable "min" because it's shadowing a built-in function or variable. In Python, "min" is a built-in function used to find the minimum value among a collection of values. That is why it can lead to naming confusion and unintended behavior.
-
-![](e5.png)
-
--It has same warning such that we can substitute unnecessary variable since it is not used inside the loop.
-
-=======
 ## arrays
 
 **Location:** ivt-ha-2024-chuck-chuck\algorithms\arrays/longest_non_repeat.py
@@ -166,4 +138,3 @@ Since the project that we using is quite large, so we decide to document the sta
 ![](f28.png)
 
 - This issue indicates that the commented-out code distracts the focus from the actual executed code. It creates a noise that increases maintenance code. And because it is never executed, it quickly becomes out of date and invalid.
->>>>>>> 17bc5aa7c1eae4ec41b6acd89e9dceb601990474
