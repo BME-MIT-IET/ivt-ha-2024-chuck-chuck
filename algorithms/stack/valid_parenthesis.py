@@ -16,7 +16,6 @@ def is_valid(s: str) -> bool:
     for char in s:
         if char in dic.values():
             stack.append(char)
-        elif char in dic:
-            if not stack or dic[char] != stack.pop():
-                return False
+        elif char in dic and (not stack or dic[char] != stack.pop()):
+            return False
     return not stack

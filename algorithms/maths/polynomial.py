@@ -308,7 +308,7 @@ class Polynomial:
         '''
         self.monomials = set()
         for m in monomials:
-            if any(map(lambda x: isinstance(m, x), [int, float, Fraction])):
+            if any(map(lambda x, m=m: isinstance(m, x), [int, float, Fraction])):
                 self.monomials |= {Monomial({}, m)}
             elif isinstance(m, Monomial):
                 self.monomials |= {m}
@@ -393,7 +393,7 @@ class Polynomial:
 
         else:
             raise ValueError('Can only subtract int, float, Fraction, Monomials, or Polynomials from Polynomials.')
-            return
+        
 
     # def __mul__(self, other: Union[int, float, Fraction, Monomial, Polynomial]) -> Polynomial:
     def __mul__(self, other: Union[int, float, Fraction, Monomial]):
@@ -461,7 +461,7 @@ class Polynomial:
 
         raise ValueError('Can only divide a polynomial by an int, float, Fraction, or a Monomial.')
 
-        return
+    
 
     # def clone(self) -> Polynomial:
     def clone(self):

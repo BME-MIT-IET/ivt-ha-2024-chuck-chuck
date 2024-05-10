@@ -41,7 +41,7 @@ def generate_key(k, seed=None):
         """calculate the inverse of a mod m
         that is, find b such that (a * b) % m == 1"""
         b = 1
-        while not (a * b) % m == 1:
+        while (a * b) % m != 1:
             b += 1
         return b
 

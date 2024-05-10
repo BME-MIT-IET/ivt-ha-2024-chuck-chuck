@@ -37,29 +37,39 @@ Answer: 5
 """
 
 
-def count_islands(grid):
-    row = len(grid)
-    col = len(grid[0])
+def is_within_bounds(x, y, row, col):
+    """Check if the coordinates are within the grid boundaries."""
+    return 0 <= x < row and 0 <= y < col
 
+def bfs(grid, start_x, start_y, visited):
+    """Perform BFS to mark all parts of the current island."""
+    row, col = len(grid), len(grid[0])
+    queue = [(start_x, start_y)]
+    directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]
+    visited[start_x][start_y] = 1
+
+    while queue:
+        x, y = queue.pop(0)
+        for dx, dy in directions:
+            nx, ny = x + dx, y + dy
+            if is_within_bounds(nx, ny, row, col) and not visited[nx][ny] and grid[nx][ny] == 1:
+                queue.append((nx, ny))
+                visited[nx][ny] = 1
+
+def check_and_initiate_bfs(grid, i, j, visited):
+    """Initiate BFS if the current cell is an unvisited land part."""
+    if grid[i][j] == 1 and not visited[i][j]:
+        bfs(grid, i, j, visited)
+        return 1
+    return 0
+
+def count_islands(grid):
+    row, col = len(grid), len(grid[0])
+    visited = [[0] * col for _ in range(row)]
     num_islands = 0
-    visited = [[0] * col for i in range(row)]
-    directions = [[-1, 0], [1, 0], [0, -1], [0, 1]]
-    queue = []
 
     for i in range(row):
-        for j, num in enumerate(grid[i]):
-            if num == 1 and visited[i][j] != 1:
-                visited[i][j] = 1
-                queue.append((i, j))
-                while queue:
-                    x, y = queue.pop(0)
-                    for k in range(len(directions)):
-                        nx_x = x + directions[k][0]
-                        nx_y = y + directions[k][1]
-                        if nx_x >= 0 and nx_y >= 0 and nx_x < row and nx_y < col:
-                            if visited[nx_x][nx_y] != 1 and grid[nx_x][nx_y] == 1:
-                                queue.append((nx_x, nx_y))
-                                visited[nx_x][nx_y] = 1
-                num_islands += 1
+        for j in range(col):
+            num_islands += check_and_initiate_bfs(grid, i, j, visited)
 
     return num_islands
