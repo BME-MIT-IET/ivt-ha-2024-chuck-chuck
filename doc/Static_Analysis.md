@@ -1,8 +1,10 @@
 # Static Analysis Report
 
+Written and Documented by Mean Diamand and Doskozhoeva Eliza
+
 ## Objective
 
-- The goal of this document is to provide the overview of the maths implementation of the project by using the static analysis tool to automatically reviewing the code of the project which can result in clean code.
+- The goal of this document is to provide the overview of some implementations of the project by using the static analysis tool to automatically reviewing the code of the project which can result in clean code.
 
 ## Tool
 
@@ -24,7 +26,9 @@
 
 ### List of the Issues
 
-Since the project that we using is quite large, so we decide to document the static analysis report on only the maths implementation of the project as shown below:
+Since the project that we using is quite large, so we decide to document the static analysis report on only the some implementations of the project as shown below:
+
+## maths
 
 #### Reliability Issues:
 
@@ -109,3 +113,5 @@ Since the project that we using is quite large, so we decide to document the sta
 ![](f22.png)
 
 - This issue indicates the wrong usage of the operator. In the code, using a combination between 'not' keyword with the '==' operator is not preferrable and may lead to confusion. It is better to use '!=' operator instead which is more straightforward and easy to understand.
+
+## stack
