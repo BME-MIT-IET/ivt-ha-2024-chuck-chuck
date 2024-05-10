@@ -13,13 +13,18 @@ def max_product(nums):
     :type nums: List[int]
     :rtype: int
     """
+    if not nums:
+        return 0
+    
     lmin = lmax = gmax = nums[0]
-    for num in nums:
+    for num in nums[1:]:
         t_1 = num * lmax
         t_2 = num * lmin
         lmax = max(max(t_1, t_2), num)
         lmin = min(min(t_1, t_2), num)
         gmax = max(gmax, lmax)
+    
+    return gmax
 
 
 """
