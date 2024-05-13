@@ -13,7 +13,7 @@ Scenarios reflecting real-world usage were crafted for each feature. These scena
 ### Key Features and Scenarios
 
 - **Huffman Coding**
-  - Scenarios for encoding and decoding files were tested to verify that the encoded files are smaller than the original and that decoding restores the original content.
+  - Scenarios for encoding and decoding files were tested to verify that the files after being decoded and encoded are the same.
 
 - **Shortest Distance from All Buildings**
   - Scenarios were designed to calculate the shortest distance from all buildings in a grid layout, with tests to handle grids with and without empty spaces, ensuring correct distance calculations or appropriate error handling.
